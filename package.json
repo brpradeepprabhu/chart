@@ -1,0 +1,26 @@
+{
+  "name": "chart",
+  "version": "1.0.0",
+  "description": "chart using createjs",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brpradeepprabhu/chart.git"
+  },
+  "keywords": [
+    "chart",
+    "createjs"
+  ],
+  "author": "brpradeepprabhu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brpradeepprabhu/chart/issues"
+  },
+  "homepage": "https://github.com/brpradeepprabhu/chart#readme",
+  "dependencies": {
+    "light-server": "^2.1.0"
+  }
+}
