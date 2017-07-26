@@ -10,29 +10,36 @@ var chart = window.chart || {};
     "use strict";
     var piechart = function (domelement, config) {
         this.canvas = document.createElement('canvas');
-        this.canvas.width = 600;
-        this.canvas.height = 600;
         this.domelement = domelement ? domelement : document.body;
         this.domelement.appendChild(this.canvas);
         this.stage = new createjs.Stage(this.canvas);
         this.container = new createjs.Container();
         this.stage.addChild(this.container);
         this.config = config;
-        this.domStyle = window.getComputedStyle(domelement, null);
-
+        this.domStyle = window.getComputedStyle(this.domelement);
+        window.addEventListener('resize', this.resizeChart.bind(this))
         createjs.Ticker.addEventListener("tick", this.stage);
     };
     piechart.constructor = piechart;
+    piechart.prototype.resizeChart = function () {
+        this.domStyle = window.getComputedStyle(this.domelement);
+        this.container.removeAllChildren();
+        if (this.orgRadius && this.percentage) {
+            this.create(this.orgRadius, this.percentage);
+        }
+    }
     piechart.prototype.create = function (radius, percentage) {
         radius = radius ? radius : 100;
-        var orgRadius = radius;
+        this.orgRadius = radius;
+        this.percentage = percentage;
         percentage = percentage ? percentage : 0;
-        console.log(radius * 2, "p", this.domStyle.width);
-        radius = (parseInt(this.domStyle.width) > (radius * 2)) ? radius : (radius * 0.9 * (parseInt(this.domStyle.width) / (radius * 2)));
-        console.log(radius)
-        this.canvas.width = radius * 2.5;
-        this.canvas.height = radius * 2.5;
-        this.canvas.style.left = (orgRadius == radius) ? (parseInt(this.domStyle.width) - this.canvas.width) / 2 + "px" : 0;
+        var domWidth = parseInt(this.domStyle.width)
+
+        radius = (domWidth > (radius * 2)) ? radius : (radius * 0.9 * (domWidth / (radius * 2)));
+        this.canvas.width = (domWidth > (radius * 2.5)) ? radius * 2.5 : domWidth;
+        this.canvas.height = (domWidth > (radius * 2.5)) ? radius * 2.5 : domWidth;
+
+        this.canvas.style.left = (this.orgRadius === radius) ? (domWidth - this.canvas.width) / 2 + "px" : 0;
         this.canvas.style.position = "absolute";
 
         var bgwidth = (this.config.background) ? ((this.config.background.width) ? this.config.background.width : 10) : 10;
