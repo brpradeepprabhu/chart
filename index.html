@@ -15,28 +15,33 @@
     var charter;
 
     function init() {
-        charter = new chart.piechart(document.body, {
+        charter = new chart.piechart(document.getElementById("afsChart"), {
             background: {
-                color: '#d5d5d4',
-                width: 15
+                color: '#d4d5d6',
+                width: 10
             },
             chart: {
-                width: 15,
-                color: '#ff0000',
+                width: 20,
+                color: '#db536b',
             },
-            shadow:{
-                width:45,
-                color: '#ffff00',
+            shadow: {
+                width: 5,
+                color: '#e88c23',
+            },
+            text: {
+                font: "",
+                color: ""
             }
         });
         //250:radius
         //85 percentage of circle
-        charter.create(250,55);
+        charter.create(120, 90);
     }
 </script>
 
 <body onload="init()">
-
+    <div class="col-xs-6" id="chartholder">
+    </div>
 </body>
 
 </html>
