@@ -6,11 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="assets/lib/createjs/createjs.min.js"></script>
+    <script src="assets/scripts/chart.js"></script>
+    <link href="">
 </head>
+<script>
+    var charter;
 
-<body>
-    <canvas width="300" height="300" style="background:beige"></canvas>
+    function init() {
+        charter = new chart.piechart(document.body, {
+            background: {
+                color: '#d5d5d4',
+                width: 15
+            },
+            chart: {
+                width: 15,
+                color: '#ff0000',
+            },
+            shadow:{
+                width:45,
+                color: '#ffff00',
+            }
+        });
+        //250:radius
+        //85 percentage of circle
+        charter.create(250,55);
+    }
+</script>
+
+<body onload="init()">
+
 </body>
 
 </html>
