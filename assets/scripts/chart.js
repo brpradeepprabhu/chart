@@ -18,15 +18,23 @@ var chart = window.chart || {};
         this.container = new createjs.Container();
         this.stage.addChild(this.container);
         this.config = config;
+        this.domStyle = window.getComputedStyle(domelement, null);
+
         createjs.Ticker.addEventListener("tick", this.stage);
     };
     piechart.constructor = piechart;
     piechart.prototype.create = function (radius, percentage) {
         radius = radius ? radius : 100;
+        var orgRadius = radius;
         percentage = percentage ? percentage : 0;
-        console.log("p", percentage);
+        console.log(radius * 2, "p", this.domStyle.width);
+        radius = (parseInt(this.domStyle.width) > (radius * 2)) ? radius : (radius * 0.9 * (parseInt(this.domStyle.width) / (radius * 2)));
+        console.log(radius)
         this.canvas.width = radius * 2.5;
         this.canvas.height = radius * 2.5;
+        this.canvas.style.left = (orgRadius == radius) ? (parseInt(this.domStyle.width) - this.canvas.width) / 2 + "px" : 0;
+        this.canvas.style.position = "absolute";
+
         var bgwidth = (this.config.background) ? ((this.config.background.width) ? this.config.background.width : 10) : 10;
         var bgcolor = (this.config.background) ? ((this.config.background.color) ? this.config.background.color : '#ff0000') : '#ff0000';
 
