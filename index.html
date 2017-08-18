@@ -15,17 +15,17 @@
     var charter;
 
     function init() {
-        charter = new chart.piechart(document.getElementById("afsChart"), {
+        charter = new chart.piechart(document.getElementById("chartholder"), {
             background: {
                 color: '#d4d5d6',
-                width: 10
+                width: 15
             },
             chart: {
                 width: 20,
                 color: '#db536b',
             },
             shadow: {
-                width: 5,
+                width:10,
                 color: '#e88c23',
             },
             text: {
@@ -35,12 +35,12 @@
         });
         //250:radius
         //85 percentage of circle
-        charter.create(120, 90);
+        charter.create(50, 90);
     }
 </script>
 
 <body onload="init()">
-    <div class="col-xs-6" id="chartholder">
+    <div class="col-lg-2 col-xs-6" id="chartholder">
     </div>
 </body>
 
